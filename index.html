@@ -1,4 +1,65 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MtgCalc365 | U.S. Mortgage Payment Calculator</title><meta name="description" content="Estimate monthly U.S. mortgage principal and interest using home price, down payment, interest rate and loan term."><link rel="stylesheet" href="style.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5287196493103465"
-     crossorigin="anonymous"></script>
-</head><body><header><div class="wrap"><h1>MtgCalc365</h1><p>U.S. Mortgage Payment Calculator</p></div></header><main class="wrap"><section class="card"><h2>Estimate Your Monthly Mortgage Payment</h2><p class="intro">Built for U.S. home buyers.</p><label for="price">Home Price ($)</label><input id="price" type="number" min="1000" step="1000" placeholder="Example: 400000"><label for="down">Down Payment ($)</label><input id="down" type="number" min="0" step="1000" placeholder="Example: 80000"><label for="rate">Annual Interest Rate (%)</label><input id="rate" type="number" min="0" step="0.01" placeholder="Example: 6.5"><label for="term">Loan Term</label><select id="term"><option value="30" selected>30 Years</option><option value="20">20 Years</option><option value="15">15 Years</option><option value="10">10 Years</option></select><button id="calculateBtn">Calculate Mortgage</button><div id="message" class="message" aria-live="polite"></div><div id="results" class="results" hidden><div class="resultbox"><span>Estimated Monthly Principal & Interest</span><strong id="monthly">$0</strong></div><div class="resultbox"><span>Estimated Loan Amount</span><strong id="loan">$0</strong></div><div class="resultbox"><span>Total Interest Over Loan</span><strong id="interest">$0</strong></div><div class="resultbox"><span>Total Principal + Interest</span><strong id="total">$0</strong></div></div><p class="note">Principal and interest only. Taxes, homeowners insurance, HOA dues, mortgage insurance, closing costs and lender fees are not included.</p></section><section class="card info"><h2>How This Mortgage Calculator Works</h2><p>MtgCalc365 uses a standard fixed-rate mortgage formula to estimate monthly principal and interest.</p></section><section class="card info"><h2>USA-First Mortgage Tool</h2><p>This calculator is designed for U.S. users and uses U.S. dollars and common U.S. mortgage terms.</p></section></main><footer><div class="wrap"><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a><p>© 2026 MtgCalc365</p></div></footer><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mortgage Payment Calculator | MtgCalc365</title>
+<meta name="description" content="Free mortgage calculator for principal and interest, taxes, insurance, HOA fees, PMI, down payment, total monthly housing cost, and extra principal payments.">
+<link rel="stylesheet" href="style.css">
+</head><body>
+<header><div class="wrap top"><a class="brand" href="index.html">MtgCalc365</a><nav><a href="#calculator">Calculator</a><a href="#guide">Guide</a><a href="#faq">FAQ</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div></header>
+<main class="wrap">
+<section class="hero"><p class="eyebrow">FREE MORTGAGE PLANNING TOOL</p><h1>Mortgage Payment Calculator</h1><p class="lead">Estimate principal and interest plus property taxes, homeowners insurance, HOA fees, PMI, and optional extra principal payments.</p></section>
+
+<section class="card" id="calculator"><h2>Calculate Your Estimated Monthly Housing Cost</h2>
+<div class="grid">
+<label>Home price ($)<input id="price" type="number" min="0" step="1000" value="400000"></label>
+<label>Down payment ($)<input id="down" type="number" min="0" step="1000" value="80000"></label>
+<label>Interest rate (%)<input id="rate" type="number" min="0" step=".01" value="6.5"></label>
+<label>Loan term (years)<input id="years" type="number" min="1" step="1" value="30"></label>
+<label>Annual property taxes ($)<input id="tax" type="number" min="0" step="100" value="6000"></label>
+<label>Annual homeowners insurance ($)<input id="insurance" type="number" min="0" step="100" value="1800"></label>
+<label>Monthly HOA ($)<input id="hoa" type="number" min="0" step="10" value="0"></label>
+<label>Monthly PMI ($)<input id="pmi" type="number" min="0" step="10" value="0"></label>
+<label>Extra principal each month ($)<input id="extra" type="number" min="0" step="10" value="0"></label>
+</div>
+<button onclick="calculate()">Calculate Mortgage</button><p class="error" id="error"></p>
+<div class="results">
+<div><span>Estimated loan amount</span><strong id="loan">—</strong></div>
+<div><span>Principal & interest</span><strong id="pi">—</strong></div>
+<div><span>Taxes + insurance</span><strong id="ti">—</strong></div>
+<div><span>HOA + PMI</span><strong id="hp">—</strong></div>
+<div class="wide"><span>Estimated total monthly housing cost</span><strong id="monthly">—</strong></div>
+<div><span>Scheduled principal & interest paid</span><strong id="totalPI">—</strong></div>
+<div><span>Scheduled interest</span><strong id="interest">—</strong></div>
+</div>
+<div id="extraBox" class="extraBox" hidden><h3>Extra Principal Estimate</h3><div class="results"><div><span>Estimated payoff time</span><strong id="extraTime">—</strong></div><div><span>Estimated interest saved</span><strong id="saved">—</strong></div><div><span>Estimated time saved</span><strong id="timeSaved">—</strong></div></div></div>
+<p class="note">Estimate only. This calculator does not include closing costs, lender fees, prepaid items, utilities, maintenance, changing taxes/insurance, adjustable rates, or every mortgage feature.</p>
+</section>
+
+<section class="content" id="guide"><h2>Mortgage Payment Guide</h2>
+<p>A mortgage payment can contain several separate costs. Principal and interest repay the loan itself. Property taxes and homeowners insurance may be collected through an escrow account, while HOA dues and mortgage insurance can add to the monthly housing budget.</p>
+<h3>Principal and Interest</h3><p>Principal reduces the loan balance. Interest is the lender's charge for borrowing. With a standard fixed-rate amortizing mortgage, the scheduled principal-and-interest payment remains generally level while the portions allocated to principal and interest change over time.</p>
+<h3>Down Payment</h3><p>The down payment reduces the amount borrowed. For example, a $400,000 home with an $80,000 down payment leaves a $320,000 starting loan amount before financed fees or other adjustments.</p>
+<h3>Property Taxes and Homeowners Insurance</h3><p>Taxes and insurance vary by property, location, insurer, and time. This calculator divides the annual amounts you enter by 12 to create a monthly budgeting estimate.</p>
+<h3>Mortgage Insurance</h3><p>Some loans require mortgage insurance depending on loan type, down payment, loan-to-value ratio, and other rules. Because actual mortgage-insurance pricing varies, MtgCalc365 lets you enter the monthly amount rather than inventing a rate.</p>
+<h3>HOA Fees</h3><p>Homeowners association dues are not part of mortgage principal and interest, but they can be an important recurring housing expense for properties subject to an association.</p>
+<h3>Extra Principal</h3><p>Additional principal payments can reduce a loan balance sooner and may reduce interest if the loan permits prepayment and the lender applies the extra amount to principal. Borrowers should verify their mortgage terms and servicer procedures.</p></section>
+
+<section class="content"><h2>Example Mortgage</h2>
+<p>Suppose a home costs $400,000 with an $80,000 down payment. The starting mortgage would be $320,000. At 6.5% fixed interest for 30 years, principal and interest is approximately $2,022.62 per month. Property taxes, insurance, HOA dues and any mortgage insurance would be added separately.</p>
+<div class="tablewrap"><table><thead><tr><th>Item</th><th>Example</th></tr></thead><tbody><tr><td>Home price</td><td>$400,000</td></tr><tr><td>Down payment</td><td>$80,000</td></tr><tr><td>Loan amount</td><td>$320,000</td></tr><tr><td>Rate / term</td><td>6.5% / 30 years</td></tr><tr><td>Approx. principal & interest</td><td>$2,022.62/month</td></tr></tbody></table></div></section>
+
+<section class="content"><h2>Costs This Calculator Does Not Automatically Estimate</h2><p>A purchase can involve closing costs, lender charges, appraisal costs, title-related charges, prepaid taxes or insurance, discount points and other expenses. Homeownership can also involve repairs, maintenance and utilities. These costs are not automatically added because they vary substantially.</p></section>
+
+<section class="content" id="faq"><h2>Frequently Asked Questions</h2>
+<h3>Is this a mortgage quote?</h3><p>No. MtgCalc365 does not lend money or provide mortgage offers. Results are mathematical estimates based on the numbers you enter.</p>
+<h3>Does the calculator include taxes and insurance?</h3><p>Yes, if you enter annual amounts. They are divided by 12 for the monthly estimate.</p>
+<h3>Does it automatically calculate PMI?</h3><p>No. PMI and other mortgage-insurance costs vary. Enter a monthly amount when applicable.</p>
+<h3>Is APR the same as the mortgage interest rate?</h3><p>No. The note rate is used for the loan's interest calculation. APR is a broader disclosure measure that can incorporate certain finance charges.</p>
+<h3>Will an extra payment always shorten the mortgage?</h3><p>It can when the extra amount is applied to principal, but actual results depend on the mortgage contract and servicer practices.</p>
+<h3>Why might a lender's number differ?</h3><p>Lender calculations can reflect exact closing dates, payment timing, fees, escrow requirements, rounding, mortgage insurance, loan programs, adjustable rates, and other terms not modeled here.</p>
+</section>
+
+<section class="content"><h2>About MtgCalc365</h2><p>MtgCalc365 is a free educational mortgage-planning utility. It is not a lender, mortgage broker, real-estate broker, financial adviser, or provider of individualized financial advice.</p></section>
+</main>
+<footer><div class="wrap"><p>Educational estimates only. Review official loan disclosures and property-specific costs before making a mortgage decision.</p><p class="creator">Created by James Gore</p><p><a href="index.html">Calculator</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p><p>© 2026 MtgCalc365</p></div></footer>
+<script src="script.js"></script></body></html>
